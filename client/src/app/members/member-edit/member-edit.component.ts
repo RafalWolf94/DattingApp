@@ -13,9 +13,9 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./member-edit.component.css']
 })
 export class MemberEditComponent implements OnInit {
-  @ViewChild('editForm') editForm: NgForm;
-  member: Member;
-  user: User;
+  @ViewChild('editForm') editForm!: NgForm;
+  member: Member | undefined;
+  user: User | undefined;
   @HostListener('window:beforeunload', ['$event']) unloadNotification($event: any) {
     if (this.editForm.dirty) {
       $event.returnValue = true;
@@ -30,14 +30,18 @@ export class MemberEditComponent implements OnInit {
     this.loadMember();
   }
 
+  
   loadMember() {
-    this.memberService.getMember(this.user.username).subscribe(member => {
+    // tslint:disable-next-line:no-non-null-assertion
+    this.memberService.getMember(this.user!.username).subscribe(member => {
       this.member = member;
     })
   }
 
+
   updateMember() {
-    this.memberService.updateMember(this.member).subscribe(() => {
+    // tslint:disable-next-line:no-non-null-assertion
+    this.memberService.updateMember(this.member!).subscribe(() => {
       this.toastr.success('Profile updated successfully');
       this.editForm.reset(this.member);
     });

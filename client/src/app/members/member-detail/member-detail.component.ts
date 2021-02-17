@@ -10,7 +10,7 @@ import { MembersService } from 'src/app/_services/members.service';
   styleUrls: ['./member-detail.component.css']
 })
 export class MemberDetailComponent implements OnInit {
-  member: Member ;
+  member: Member | undefined;
   galleryOptions: NgxGalleryModule[] | undefined;
   galleryImages: NgxGalleryImage[] | undefined;
   constructor(private memberService: MembersService, private route: ActivatedRoute) { }
@@ -32,7 +32,8 @@ export class MemberDetailComponent implements OnInit {
 
   getImages(): NgxGalleryImage[] {
     const imageUrls = [];
-    for (const photo of this.member.photos) {
+    // tslint:disable-next-line:no-non-null-assertion
+    for (const photo of this.member!.photos) {
       imageUrls.push({
         small: photo?.url,
         medium: photo?.url,
