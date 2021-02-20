@@ -46,7 +46,7 @@ namespace API.Controllers {
         //api/users/3
         [Authorize]
         [HttpGet ("{username}", Name = "GetUser")]
-        public async Task<ActionResult<MemberDto>> GetUsers (string username) => await userRepository.GetMemberAsync (username);
+        public async Task<ActionResult<MemberDto>> GetUser (string username) => await userRepository.GetMemberAsync (username);
 
         [HttpPut]
         public async Task<ActionResult> UpdateUser (MemberUpdateDto memberUpdateDto) {
