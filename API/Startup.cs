@@ -2,48 +2,43 @@ using API.Extensions;
 using API.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace API
-{
-    public class Startup
-    {
+namespace API {
+    public class Startup {
         private IConfiguration _config { get; }
 
-        public Startup(IConfiguration config) => _config = config;
-
-
+        public Startup (IConfiguration config) => _config = config;
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddApplicationServices(_config);
-            services.AddControllers();
-            services.AddCors();
-            services.AddIdentityServices(_config);
+        public void ConfigureServices (IServiceCollection services) {
+            services.AddApplicationServices (_config);
+            services.AddControllers ();
+            services.AddCors ();
+            services.AddIdentityServices (_config);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            app.UseMiddleware<ExceptionMiddleware>();
+        public void Configure (IApplicationBuilder app, IWebHostEnvironment env) {
+            app.UseMiddleware<ExceptionMiddleware> ();
 
-            app.UseHttpsRedirection();
+            app.UseHttpsRedirection ();
 
-            app.UseRouting();
+            app.UseRouting ();
 
-            app.UseCors(x => x.AllowAnyMethod().AllowAnyHeader().WithOrigins("https://localhost:4200"));
+            app.UseCors (x => x.AllowAnyMethod ().AllowAnyHeader ().WithOrigins ("https://localhost:4200"));
 
-            app.UseAuthentication();
-            app.UseAuthorization();
+            app.UseAuthentication ();
+            app.UseAuthorization ();
 
-            app.UseEndpoints(endpoints =>
-            {
-               
-                endpoints.MapControllers();
+            app.UseEndpoints (endpoints => {
+
+                endpoints.MapControllers ();
             });
+
         }
     }
 }
