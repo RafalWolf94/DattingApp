@@ -1,13 +1,11 @@
-﻿using API.Extensions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.Extensions;
 
-namespace API.Entities
-{
-    public class AppUser
-    {
+namespace API.Entities {
+    public class AppUser {
 
         public int Id { get; set; }
         public string UserName { get; set; }
@@ -24,11 +22,8 @@ namespace API.Entities
         public string City { get; set; }
         public string Country { get; set; }
         public ICollection<Photo> Photos { get; set; }
-
-        //public int GetAge() => DateOfBirth.CalculateAge();
-
-
-
+        public ICollection<UserLike> LikedByUsers { get; set; }
+        public ICollection<UserLike> LikedUsers { get; set; }
 
     }
 }
